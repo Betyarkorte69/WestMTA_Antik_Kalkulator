@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antik Kalkulátor - Max ár + Globális % (csak összesítés)</title>
+<style>
+  body { font-family: Arial, sans-serif; background-color: rgb(52,78,115); color: #fff; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #1e3a5f; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+  h1 { color: #cce4ff; text-align: center; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .item { display: flex; align-items: center; justify-content: space-between; background-color: #27496d; padding: 10px; border: 1px solid #3b6ea5; border-radius: 8px; }
+  .item img { max-width: 50px; height: auto; }
+  .item-info { flex: 1; padding: 0 10px; }
+  .item-name { color: #fff; font-weight: bold; }
+  .price-range { font-size: 12px; color: #ffd27f; }
+  .label { font-size: 12px; color: #a4ffb0; text-align: center; margin-top: 4px; }
+  .input-group { display: flex; flex-direction: column; align-items: center; }
+  input[type='number'] { width: 80px; padding: 6px; border: 1px solid #3b6ea5; border-radius: 6px; background-color: rgb(52,78,115); color: #fff; }
+  .total { font-weight: bold; background-color: #15314f; margin-top: 20px; padding: 10px; border-radius: 6px; color: #cce4ff; display: flex; align-items: center; justify-content: space-between; }
+  .percent-input { display: flex; align-items: center; gap: 5px; }
+  .percent-input input { width: 60px; padding: 4px; border: 1px solid #3b6ea5; border-radius: 6px; background-color: rgb(52,78,115); color: #fff; text-align: right; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Antik Kalkulátor</h1>
+  <div id="items" class="grid">
+    <div class="item" data-max="13000"><img src="https://i.imgur.com/2C4MfiJ.png"><div class="item-info"><div class="item-name">Ezüst zsebóra</div><div class="price-range">4.814$ – 13.000$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="19500"><img src="https://i.imgur.com/bhBQgaZ.png"><div class="item-info"><div class="item-name">Ezüst gyűrű</div><div class="price-range">7.222$ – 19.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="19500"><img src="https://i.imgur.com/lpZft4h.png"><div class="item-info"><div class="item-name">Ezüst óra</div><div class="price-range">7.222$ – 19.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="19500"><img src="https://i.imgur.com/yvTyFqd.png"><div class="item-info"><div class="item-name">Ezüst karkötő</div><div class="price-range">7.222$ – 19.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="26000"><img src="https://i.imgur.com/HVyRpJF.png"><div class="item-info"><div class="item-name">Szovjet vörös csillag</div><div class="price-range">9.629$ – 26.000$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="32500"><img src="https://i.imgur.com/6PeRjNV.png"><div class="item-info"><div class="item-name">Antik gyertyatartó</div><div class="price-range">12.037$ – 32.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="32500"><img src="https://i.imgur.com/UZzwirt.png"><div class="item-info"><div class="item-name">Ezüst nyaklánc</div><div class="price-range">12.037$ – 32.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="32500"><img src="https://i.imgur.com/BjYw0MP.png"><div class="item-info"><div class="item-name">Ékszerdoboz arany kerettel</div><div class="price-range">12.037$ – 32.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="32500"><img src="https://i.imgur.com/24opVqC.png"><div class="item-info"><div class="item-name">Arany gyűrű</div><div class="price-range">12.037$ – 32.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="39000"><img src="https://i.imgur.com/E7sEAyw.png"><div class="item-info"><div class="item-name">Arany nyaklánc</div><div class="price-range">14.444$ – 39.000$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="39000"><img src="https://i.imgur.com/mdr7mhJ.png"><div class="item-info"><div class="item-name">Arany óra</div><div class="price-range">14.444$ – 39.000$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="52000"><img src="https://i.imgur.com/NsKzpyK.png"><div class="item-info"><div class="item-name">Arany szobor</div><div class="price-range">19.259$ – 52.000$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="58500"><img src="https://i.imgur.com/IZxwWGR.png"><div class="item-info"><div class="item-name">Gyémánt gyűrű</div><div class="price-range">21.666$ – 58.500$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+    <div class="item" data-max="65000"><img src="https://i.imgur.com/ul09FBy.png"><div class="item-info"><div class="item-name">Gyémánt nyaklánc</div><div class="price-range">24.074$ – 65.000$</div></div><div class="input-group"><input type="number" min="0" value="0"><div class="label">Darab</div></div></div>
+  </div>
+  <div class="total">
+    <div>Összesen (USD): <span id="grandTotal">0</span></div>
+    <div class="percent-input">
+      <input type="number" id="percent" min="0" max="100" value="100"><span>%</span>
+    </div>
+  </div>
+</div>
+<script>
+  const items = document.getElementById('items');
+  const percentInput = document.getElementById('percent');
+  let rawTotal = 0;
+
+  function calculateRawTotal() {
+    rawTotal = 0;
+    items.querySelectorAll('.item').forEach(row => {
+      const qty = parseFloat(row.querySelector('input')?.value) || 0;
+      const maxPrice = parseFloat(row.dataset.max) || 0;
+      rawTotal += qty * maxPrice;
+    });
+    applyPercent();
+  }
+
+  function applyPercent() {
+    const percent = parseFloat(percentInput.value) || 0;
+    const adjusted = rawTotal * (percent / 100);
+    document.getElementById('grandTotal').textContent = Math.round(adjusted);
+  }
+
+  items.addEventListener('input', calculateRawTotal);
+  percentInput.addEventListener('input', applyPercent);
+</script>
+</body>
+</html>
